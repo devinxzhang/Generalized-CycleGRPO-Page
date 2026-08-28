@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Generalized CycleGRPO unifies fine-grained multimodal understanding and localization across spatial, temporal, and spatio-temporal domains.">
+  <meta property="og:title" content="Generalized CycleGRPO">
+  <meta property="og:description" content="Fine-grained multimodal understanding and grounding in space and time.">
+  <meta property="og:image" content="./static/images/teaser.png">
+  <title>Generalized CycleGRPO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+</head>
+<body>
+  <nav class="nav" aria-label="Page navigation">
+    <a class="brand" href="#top"><span class="cycle-mark">C</span> Generalized CycleGRPO</a>
+    <div class="nav-links">
+      <a href="#method">Method</a><a href="#results">Results</a><a href="#dove">DOVE</a><a href="#bibtex">BibTeX</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="eyebrow">Spatial · Temporal · Spatio-temporal</div>
+    <h1>Generalized CycleGRPO for<br><span>Fine-Grained Multimodal Understanding and Grounding</span></h1>
+    <div class="authors">
+      <a href="https://github.com/devinxzhang">Xin Zhang</a><a href="https://haochen-wang409.github.io/">Haochen Wang</a><span>Beibei Lin</span><span>Zhaoxiang Zhang</span><a href="https://tanrobby.github.io/">Robby T. Tan</a><span>Dacheng Tao</span><span>Xiangtai Li</span>
+    </div>
+    <div class="links">
+      <span class="button disabled"><i class="fa-solid fa-file-pdf"></i> Paper</span>
+      <a class="button" href="https://github.com/devinxzhang/CycleGRPO"><i class="fa-brands fa-github"></i> Code</a>
+      <a class="button" href="https://huggingface.co/XinNUS/CycleGRPO-4B"><span>🤗</span> Models</a>
+      <a class="button" href="#dove"><i class="fa-solid fa-film"></i> DOVE</a>
+    </div>
+    <p class="one-liner">One policy describes a region, localizes its own description, and learns from the reconstruction—across masks, time intervals, and timestamped spatial evidence.</p>
+  </header>
+
+  <main>
+    <section class="wide figure-shell reveal">
+      <img src="./static/images/teaser.png" alt="Generalized CycleGRPO across spatial, temporal, and spatio-temporal domains">
+      <p class="caption">A single region–text–region cycle extends naturally from images to videos.</p>
+    </section>
+
+    <section class="section narrow reveal" id="abstract">
+      <div class="section-kicker">Overview</div><h2>Fine-grained intelligence needs both directions.</h2>
+      <p class="lead">A model should not only describe a designated region, but also recover that region from language. Generalized CycleGRPO couples these dual capabilities with a geometrically verifiable reward, requiring neither caption annotations nor an external language-model judge during reinforcement learning.</p>
+      <div class="domain-grid">
+        <article><div class="domain-icon spatial"></div><h3>Spatial</h3><p>Masks and boxes in images.</p></article>
+        <article><div class="domain-icon temporal"></div><h3>Temporal</h3><p>Target intervals and recurring events.</p></article>
+        <article><div class="domain-icon joint"></div><h3>Spatio-temporal</h3><p>Timestamped boxes and sparse trajectories.</p></article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="method">
+      <div class="section-kicker">Method</div><h2>Actor as its own critic.</h2>
+      <div class="figure-shell"><img src="./static/images/method.png" alt="Generalized CycleGRPO method pipeline"></div>
+      <div class="steps">
+        <div><b>01</b><h3>Describe</h3><p>The policy generates candidate captions conditioned on a target region.</p></div>
+        <div><b>02</b><h3>Re-localize</h3><p>The same policy localizes each caption back into the original region space.</p></div>
+        <div><b>03</b><h3>Learn</h3><p>Overlap with the input region yields direct, verifiable rewards for both interfaces.</p></div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="results">
+      <div class="section-kicker">Results</div><h2>Consistent gains, measured in each native space.</h2>
+      <p class="lead">We compare matched base policies within each domain rather than mixing incompatible metrics or model families.</p>
+      <div class="figure-shell"><img src="./static/images/results.png" alt="Performance improvements on spatial, temporal, and spatio-temporal benchmarks"></div>
+    </section>
+
+    <section class="section dove reveal" id="dove">
+      <div class="section-kicker">New benchmark</div><h2>DOVE tests whether a caption identifies the right occurrence.</h2>
+      <p class="lead">Distinctive Occurrence-level Video-caption Evaluation groups a target interval with semantically similar recurrences. Models view the complete video and describe a specified interval; a model-blind judge then answers verified temporal probes using only the generated caption.</p>
+      <div class="two-up">
+        <figure class="figure-shell"><img src="./static/images/dove-pipeline.png" alt="DOVE construction and evaluation pipeline"><figcaption>Construction and evaluation protocol.</figcaption></figure>
+        <figure class="figure-shell"><img src="./static/images/dove-statistics.png" alt="DOVE benchmark statistics"><figcaption>Occurrence-level benchmark statistics.</figcaption></figure>
+      </div>
+      <figure class="figure-shell mt"><img src="./static/images/dove-construction.png" alt="A verified DOVE case with target interval and temporal probes"><figcaption>A verified case: context, target occurrence, and occurrence-sensitive probes.</figcaption></figure>
+    </section>
+
+    <section class="section reveal" id="visuals">
+      <div class="section-kicker">Visual analysis</div><h2>Descriptions remain tied to the designated evidence.</h2>
+      <div class="gallery">
+        <figure class="figure-shell"><img src="./static/images/visualization.png" alt="Qualitative comparisons across CycleGRPO tasks"></figure>
+        <figure class="figure-shell"><img src="./static/images/spatiotemporal.png" alt="Spatio-temporal captioning example"></figure>
+      </div>
+    </section>
+
+    <section class="section narrow reveal" id="bibtex">
+      <div class="section-kicker">Citation</div><h2>BibTeX</h2>
+      <div class="code-wrap"><button id="copy" type="button">Copy</button><pre><code id="bibcode">@article{zhang2026generalized,
+  title   = {Generalized CycleGRPO for Fine-Grained Multimodal
+             Understanding and Grounding},
+  author  = {Zhang, Xin and Wang, Haochen and Lin, Beibei and
+             Zhang, Zhaoxiang and Tan, Robby T. and Tao, Dacheng
+             and Li, Xiangtai},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year    = {2026}
+}</code></pre></div>
+    </section>
+  </main>
+
+  <footer><p>Generalized CycleGRPO · Project page</p><p>Built upon the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">Academic Project Page Template</a>.</p></footer>
+  <script src="./static/js/index.js"></script>
+</body>
+</html>
