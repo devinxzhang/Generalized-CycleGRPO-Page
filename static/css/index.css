@@ -6,6 +6,8 @@
 /* publication authors and affiliations */
 .hero{max-width:1280px}
 .authors{flex-wrap:nowrap;max-width:none;gap:6px 12px;font-size:19px;font-weight:500;white-space:nowrap}
+.authors a{color:var(--blue);text-decoration-color:transparent;text-underline-offset:4px;transition:color .16s ease,text-decoration-color .16s ease}
+.authors a:hover{color:#183f9f;text-decoration:underline;text-decoration-thickness:1px}
 .authors sup,.affiliations sup{margin-left:2px;color:var(--blue);font-size:.58em}
 .affiliations{display:flex;flex-wrap:wrap;justify-content:center;gap:3px 24px;max-width:1050px;margin:13px auto 0;color:var(--muted);font-size:15px}
 @media(max-width:760px){.authors{flex-wrap:wrap;font-size:18px;white-space:normal}.affiliations{font-size:14px}}
